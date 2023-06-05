@@ -6,6 +6,8 @@ import android.view.KeyEvent
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +18,10 @@ class MainActivity : AppCompatActivity() {
         // │          WebView            │
         // └─────────────────────────────┘
         var webView: WebView = findViewById<WebView>(R.id.webview)
-        var url: String = "https://www.youtube.com"
+
+
+
+        val url = getString(R.string.URL_LOGIN)
         var webChromeClient: WebChromeClient
 
         webView.settings.javaScriptEnabled = true
@@ -24,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         webView.webChromeClient = object : WebChromeClient() {}
         webView.webViewClient = object : WebViewClient(){
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                webView.settings.userAgentString="app_mobile_v1"
                 webView.loadUrl(url.toString());
                 return true
             }
